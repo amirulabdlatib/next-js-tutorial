@@ -12,17 +12,29 @@ export default function Register() {
             <form action={action} className="space-y-4">
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input type="text" name="email" id="email" />
+                    <input type="text" name="email" id="email" defaultValue={state?.email} />
+                    {state?.errors?.email && <p className="error">{state.errors.email[0]}</p>}
                 </div>
 
                 <div>
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" id="password" />
+                    {state?.errors?.password && (
+                        <div className="error">
+                            <p>Password must:</p>
+                            <ul className="list-disc list-inside">
+                                {state.errors.password.map((error, index) => (
+                                    <li key={index}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
 
                 <div>
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input type="password" name="confirmPassword" id="confirmPassword" />
+                    {state?.errors?.confirmPassword && <p className="error">{state.errors.confirmPassword[0]}</p>}
                 </div>
 
                 <div className="flex items-end gap-4">
