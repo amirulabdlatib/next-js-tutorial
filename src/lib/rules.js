@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import { email, z } from "zod/v4";
 
 export const RegisterFormSchema = z
     .object({
@@ -18,3 +18,8 @@ export const RegisterFormSchema = z
         message: "Password fields do not match.",
         path: ["confirmPassword"],
     });
+
+export const LoginFormSchema = z.object({
+    email: z.string().email({ message: "Please enter a valid email." }).trim(),
+    password: z.string().min(1, { message: "Password is required" }).trim(),
+});

@@ -1,10 +1,11 @@
 "use client";
 
+import { login } from "@/actions/auth";
 import Link from "next/link";
 import { useActionState } from "react";
 
 export default function Register() {
-    const [state, action, isPending] = useActionState(() => {}, undefined);
+    const [state, action, isPending] = useActionState(login, undefined);
     return (
         <div className="container w-1/2">
             <h1 className="title">Login</h1>
@@ -18,6 +19,7 @@ export default function Register() {
                 <div>
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" id="password" />
+                    {state?.errors?.password && <p className="error">{state.errors.password[0]}</p>}
                 </div>
 
                 <div className="flex items-end gap-4">
